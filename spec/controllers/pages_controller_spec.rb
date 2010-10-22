@@ -3,6 +3,10 @@ require 'spec_helper'
 describe PagesController do
 integrate_views
 
+before(:each) do
+	@base_title = "Sample test app for Rspec"
+end
+
   describe "GET 'home'" do
     it "should be successful" do
       get 'home'
@@ -11,7 +15,7 @@ integrate_views
 	
 	it "should have a title" do
 		get 'home'
-		response.should have_tag("title", "Sample test app for Rspec | Home")
+		response.should have_tag("title", @base_title + " | Home")
 	end
 	
   end
@@ -24,7 +28,7 @@ integrate_views
 	
 	it "should have a title" do
 		get 'contact'
-		response.should have_tag("title", "Sample test app for Rspec | Contact")
+		response.should have_tag("title",  @base_title + " | Contact")
 	end
   end
   
@@ -36,7 +40,19 @@ integrate_views
 	
 	it "should have a title" do
 		get 'about'
-		response.should have_tag("title", "Sample test app for Rspec | About")
+		response.should have_tag("title",  @base_title + " | About")
+	end
+  end
+  
+  describe "GET 'help'" do
+	it "should be successful" do
+		get 'help'
+		response.should be_success
+	end
+	
+	it "should have a title" do
+		get 'help'
+		response.should have_tag("title",  @base_title + " | Help")
 	end
   end
   
